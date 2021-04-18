@@ -66,3 +66,5 @@ It means that the native vector asset does not exist or is out of sync with the 
 ## License
 
 [MIT License](http://opensource.org/licenses/mit-license.html). © Joel Arvidsson 2021
+
+[`svg2vd`](https://github.com/Shopify/svg2vd): MIT © 2020 Shopify
