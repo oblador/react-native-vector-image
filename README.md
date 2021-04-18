@@ -1,11 +1,11 @@
 <p align="center">
   <h1 align="center">React Native Vector Image</h1>
-  <h3 align="center">Generate iOS/Android native vector assets from SVG.</h3>
+  <h3 align="center">iOS/Android native vector assets generated from SVG.</h3>
 </p>
 
-- Faster render time, about 5x on Android.
-- Smaller JS bundle, which leads to faster startup.
-- Platform native dark mode support.
+- Faster render – ~5x faster than `react-native-svg`.
+- Smaller JS bundle = faster startup.
+- Native support for dark mode.
 
 ## Installation
 
@@ -28,6 +28,8 @@ const App = () => <VectorImage source={require('./image.svg')} />;
 To add dark mode to your image, create a new file with an `.dark.svg` extension, ie `image.svg` = light and `image.dark.svg` = dark.
 
 ### Step 2: generate native assets
+
+This takes a while as metro has to go through all the code to find the imported SVGs.
 
 ```sh
 yarn react-native-vector-image generate
