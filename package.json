@@ -1,0 +1,40 @@
+{
+  "name": "react-native-vector-image",
+  "version": "0.1.0",
+  "description": "Native vector images generated from SVG",
+  "main": "src/index.js",
+  "homepage": "https://github.com/oblador/react-native-vector-image",
+  "scripts": {},
+  "bin": {
+    "react-native-vector-image": "bin/react-native-vector-image.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "!.DS_Store"
+  ],
+  "keywords": [
+    "react-native",
+    "image",
+    "svg",
+    "vector"
+  ],
+  "author": "Joel Arvidsson",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^5.0.0",
+    "fs-extra": "^9.1.0",
+    "pdfkit": "^0.12.1",
+    "svg-to-pdfkit": "^0.1.8",
+    "tempy": "^1.0.1",
+    "yargs": "^16.2.0"
+  },
+  "peerDependencies": {
+    "@klarna/react-native-vector-drawable": "^0.1.0",
+    "metro": ">=0.58.0",
+    "metro-config": ">=0.58.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
