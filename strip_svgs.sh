@@ -6,5 +6,5 @@
 RN_ASSETS_PATH="$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/assets"
 
 if [ -d "$RN_ASSETS_PATH" ]; then
-  rm $RN_ASSETS_PATH/**/*.svg
+  find $RN_ASSETS_PATH -type f -name "*.svg" -delete 
 fi
