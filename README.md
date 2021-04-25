@@ -3,6 +3,9 @@
   <h3 align="center">iOS/Android native vector assets generated from SVG.</h3>
 </p>
 
+[![Tests](https://github.com/oblador/react-native-vector-image/actions/workflows/tests.yml/badge.svg)](https://github.com/oblador/react-native-vector-image/actions/workflows/tests.yml) [![npm](https://img.shields.io/npm/v/react-native-vector-image.svg)](https://npmjs.com/package/react-native-vector-image)
+
+
 - Faster render – ~5x faster than `react-native-svg`.
 - Smaller JS bundle = faster startup.
 - Native support for dark mode.
