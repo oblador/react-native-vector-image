@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Native vector images generated from SVG",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "homepage": "https://github.com/oblador/react-native-vector-image",
   "scripts": {},
   "bin": {
