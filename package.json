@@ -12,6 +12,8 @@
   "files": [
     "bin",
     "src",
+    "strip_svgs.sh",
+    "strip_svgs.gradle",
     "!.DS_Store"
   ],
   "keywords": [
