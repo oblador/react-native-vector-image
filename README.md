@@ -13,6 +13,33 @@
 yarn add react-native-vector-image @klarna/react-native-drawable-android
 ```
 
+### Android
+
+Edit `android/app/build.gradle` to look like this (without the +):
+
+```diff
+project.ext.react = [
+    enableHermes: false,  // clean and rebuild if changing
+]
+
+apply from: "../../node_modules/react-native/react.gradle"
++ apply from: "../../node_modules/react-native-vector-image/strip_svgs.gradle"
+```
+
+### iOS
+
+Open your project in Xcode, select the _Build Phases_ tab, and edit the `Bundle React Native code and images` script to look like this (without the +):
+
+```diff
+set -e
+
+export NODE_BINARY=node
+../node_modules/react-native/scripts/react-native-xcode.sh
++ ../node_modules/react-native-vector-image/strip_svgs.sh
+```
+
+<img width="1212" alt="" src="https://user-images.githubusercontent.com/378279/115999935-544c0600-a5ee-11eb-9c59-6fb50e434ed0.png">
+
 ## Usage
 
 Since native vector assets cannot be served over http via metro dev server, they must be generated and compiled into the app bundle.
