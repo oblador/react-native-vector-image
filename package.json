@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "homepage": "https://github.com/oblador/react-native-vector-image",
-  "scripts": {},
+  "scripts": {
+    "test": "jest src"
+  },
   "bin": {
     "react-native-vector-image": "bin/react-native-vector-image.js"
   },
@@ -14,6 +16,7 @@
     "src",
     "strip_svgs.sh",
     "strip_svgs.gradle",
+    "!*.spec.js",
     "!.DS_Store"
   ],
   "keywords": [
@@ -38,6 +41,7 @@
     "metro-config": ">=0.58.0"
   },
   "devDependencies": {
+    "jest": "^26.6.3",
     "prettier": "^2.2.1"
   }
 }

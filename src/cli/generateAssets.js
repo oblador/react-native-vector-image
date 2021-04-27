@@ -3,13 +3,7 @@ const path = require('path');
 const generateIosAsset = require('./generateIosAsset');
 const generateAndroidAsset = require('./generateAndroidAsset');
 const getAssets = require('./getAssets');
-
-function getResourceName(asset) {
-  return `${asset.name.replace(
-    /[^a-z0-9_]+/g,
-    '_'
-  )}_codegen_${asset.hash.substr(0, 6)}`;
-}
+const getResourceName = require('../getResourceName');
 
 async function removeGeneratedAssets(directory) {
   const exists = await fs.exists(directory);
@@ -19,7 +13,9 @@ async function removeGeneratedAssets(directory) {
   const contents = await fs.readdir(directory);
   await Promise.all(
     contents
-      .filter((name) => /._codegen_[a-z0-9]{6}\.(imageset|xml)$/.test(name))
+      .filter((name) =>
+        /._(svg|codegen)_[a-z0-9]{6}\.(imageset|xml)$/.test(name)
+      )
       .map((name) => fs.remove(path.join(directory, name)))
   );
 }
