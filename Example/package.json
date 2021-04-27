@@ -8,12 +8,14 @@
     "start": "react-native start",
     "test": "jest",
     "postinstall": "DESTINATION='node_modules/react-native-vector-image' LIB_FILE=`cd .. && echo \\`pwd\\`/\\`npm pack\\`` && (rm -rf $DESTINATION || true) && mkdir -p $DESTINATION && tar -xvzf $LIB_FILE -C $DESTINATION --strip-components 1 && rm $LIB_FILE",
+    "assets": "react-native-vector-image generate",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@klarna/react-native-vector-drawable": "^0.1.0",
     "react": "17.0.1",
-    "react-native": "0.64.0"
+    "react-native": "0.64.0",
+    "react-native-vector-image": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
