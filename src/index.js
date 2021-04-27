@@ -1,13 +1,7 @@
 import React from 'react';
 import AssetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { VectorImageCompat } from './VectorImageCompat';
-
-function getResourceName(asset) {
-  return `${asset.name.replace(
-    /[^a-z0-9_]+/g,
-    '_'
-  )}_codegen_${asset.hash.substr(0, 6)}`;
-}
+import getResourceName from './getResourceName';
 
 export default function VectorImage({ source, style, ...props }) {
   const asset = AssetRegistry.getAssetByID(source);
