@@ -17,6 +17,7 @@
     "strip_svgs.sh",
     "strip_svgs.gradle",
     "!*.spec.js",
+    "!fixtures",
     "!.DS_Store"
   ],
   "keywords": [
