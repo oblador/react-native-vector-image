@@ -13,7 +13,7 @@
 ## Installation
 
 ```sh
-yarn add react-native-vector-image @klarna/react-native-drawable-android
+yarn add react-native-vector-image @klarna/react-native-vector-drawable
 ```
 
 ### Android
