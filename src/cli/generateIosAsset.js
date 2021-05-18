@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
 const path = require('path');
 const convertSvgToPdf = require('./convertSvgToPdf');
-const resolveAssetSources = require('./resolveAssetSources');
+const { outputStream } = require('./streams');
 
-async function generateIosAsset(asset, resourceName, output) {
-  const { light, dark } = resolveAssetSources(asset);
+async function generateIosAsset(source, resourceName, output) {
+  const { light, dark, width, height } = source;
   const xcassetPath = path.join(output, `${resourceName}.imageset`);
 
   const xcasset = {
@@ -36,10 +36,17 @@ async function generateIosAsset(asset, resourceName, output) {
   fs.outputJsonSync(path.join(xcassetPath, 'Contents.json'), xcasset, {
     spaces: 2,
   });
-  const size = [asset.width, asset.height];
-  await convertSvgToPdf(light, path.join(xcassetPath, 'light.pdf'), size);
+  const size = [width, height];
+
+  await outputStream(
+    convertSvgToPdf(light, size),
+    path.join(xcassetPath, 'light.pdf')
+  );
   if (dark) {
-    await convertSvgToPdf(dark, path.join(xcassetPath, 'dark.pdf'), size);
+    await outputStream(
+      convertSvgToPdf(dark, size),
+      path.join(xcassetPath, 'dark.pdf')
+    );
   }
 }
 

@@ -29,6 +29,8 @@
   "author": "Joel Arvidsson",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.1",
+    "chroma-js": "^2.1.1",
     "execa": "^5.0.0",
     "fs-extra": "^9.1.0",
     "pdfkit": "^0.12.1",
