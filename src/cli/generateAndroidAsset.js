@@ -1,18 +1,17 @@
-const fs = require('fs');
 const path = require('path');
 const convertSvgToVd = require('./convertSvgToVd');
-const resolveAssetSources = require('./resolveAssetSources');
+const { outputStream } = require('./streams');
 
-async function generateAndroidAsset(asset, resourceName, outputDir) {
-  const { light, dark } = resolveAssetSources(asset);
+async function generateAndroidAsset(source, resourceName, outputDir) {
+  const { light, dark } = source;
 
-  await convertSvgToVd(
-    light,
+  await outputStream(
+    convertSvgToVd(light),
     path.join(outputDir, 'drawable', `${resourceName}.xml`)
   );
   if (dark) {
-    await convertSvgToVd(
-      dark,
+    await outputStream(
+      convertSvgToVd(dark),
       path.join(outputDir, 'drawable-night', `${resourceName}.xml`)
     );
   }

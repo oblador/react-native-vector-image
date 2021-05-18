@@ -1,7 +1,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 const yargs = require('yargs/yargs');
+const chalk = require('chalk');
 const generateAssets = require('./generateAssets');
+const { VectorImageError, ArgumentError } = require('./errors');
 
 const detectReactNativeAppName = () => {
   try {
@@ -46,23 +48,41 @@ function main(argv) {
       async (options) => {
         try {
           if (options.iosOutput && !fs.existsSync(options.iosOutput)) {
-            throw new Error(
+            throw new ArgumentError(
               "Invalid --ios-output argument, folder doesn't exist"
             );
           }
           if (options.androidOutput && !fs.existsSync(options.androidOutput)) {
-            throw new Error(
+            throw new ArgumentError(
               "Invalid --android-output argument, folder doesn't exist"
             );
           }
           if (!options.iosOutput && !options.androidOutput) {
-            throw new Error('At least one output option must be passed');
+            throw new ArgumentError(
+              'At least one output option must be passed'
+            );
           }
           await generateAssets(options);
         } catch (error) {
-          console.warn(error.message);
-          console.info(error.stack);
-          console.error('Failed to generate vector assets');
+          if (error instanceof VectorImageError) {
+            if (error instanceof ArgumentError) {
+              console.error(chalk.bold.red(error.message));
+            } else {
+              console.error(chalk.bold.red('Failed to generate vector assets'));
+              if (error.file) {
+                console.error(
+                  `${chalk.bold(path.relative(process.cwd(), error.file))}: ${
+                    error.message
+                  }`
+                );
+              } else {
+                console.error(error.message);
+              }
+            }
+          } else {
+            console.error(error.stack || error.message);
+          }
+          process.exit(1);
         }
       }
     )

@@ -1,22 +1,37 @@
-const fs = require('fs-extra');
-const path = require('path');
-const tempy = require('tempy');
 const convertSvgToVd = require('./convertSvgToVd');
+const { reactLogo, rectangle, dropShadow } = require('./fixtures');
+const { readStream } = require('./streams');
+
+const convert = (fixture) => readStream(convertSvgToVd(fixture));
 
 describe('convertSvgToVd', () => {
   it('is deterministic', async () => {
-    const targetPath1 = tempy.file({ extension: 'xml' });
-    const targetPath2 = tempy.file({ extension: 'xml' });
-    afterEach(async () => {
-      await fs.remove(targetPath1);
-      await fs.remove(targetPath2);
-    });
-    const sourcePath = path.join(__dirname, 'fixtures', 'react.svg');
-    const size = [300, 267];
-    await convertSvgToVd(sourcePath, targetPath1, size);
-    await convertSvgToVd(sourcePath, targetPath2, size);
-    const file1 = await fs.readFile(targetPath1);
-    const file2 = await fs.readFile(targetPath2);
+    const file1 = await convert(reactLogo);
+    const file2 = await convert(reactLogo);
     expect(file1.equals(file2)).toBe(true);
+  });
+
+  it('supports rgba colors', async () => {
+    const result = (await convert(rectangle)).toString();
+    expect(result).toEqual(
+      expect.stringContaining('android:fillColor="#d8d8d880"')
+    );
+    expect(result).toEqual(
+      expect.stringContaining('android:strokeColor="#979797"')
+    );
+  });
+
+  it('throws for non-svg files', async () => {
+    await expect(convert('garbage')).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"Not a proper SVG file"`
+    );
+  });
+
+  it('throws for unsupported elements like feGaussianBlur', async () => {
+    await expect(
+      convert(dropShadow)
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `"line 4: <filter> is not supported; line 5: <feOffset> is not supported; line 6: <feGaussianBlur> is not supported; line 7: <feComposite> is not supported; line 8: <feColorMatrix> is not supported"`
+    );
   });
 });

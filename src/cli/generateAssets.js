@@ -4,6 +4,8 @@ const generateIosAsset = require('./generateIosAsset');
 const generateAndroidAsset = require('./generateAndroidAsset');
 const getAssets = require('./getAssets');
 const getResourceName = require('../getResourceName');
+const resolveAssetSources = require('./resolveAssetSources');
+const { InputError, TransformationError } = require('./errors');
 
 async function removeGeneratedAssets(directory) {
   const exists = await fs.exists(directory);
@@ -41,22 +43,36 @@ async function generateAssets({
     assets
       .filter((asset) => asset.type === 'svg')
       .map(async (asset) => {
-        const resourceName = getResourceName(asset);
+        const { light, dark } = resolveAssetSources(asset);
+        try {
+          const [scale] = asset.scales;
+          if (scale !== 1) {
+            throw new InputError(
+              `Unexpected scale, expected 1 got ${JSON.stringify(scale)}`
+            );
+          }
 
-        const [scale] = asset.scales;
-        if (scale !== 1) {
-          throw new Error(
-            `Unexpected scale for ${
-              asset.name
-            }, expected 1 got ${JSON.stringify(scale)}`
-          );
-        }
-
-        if (iosOutput) {
-          await generateIosAsset(asset, resourceName, iosOutput);
-        }
-        if (androidOutput) {
-          await generateAndroidAsset(asset, resourceName, androidOutput);
+          const resourceName = getResourceName(asset);
+          const source = {
+            light: fs.readFileSync(light).toString(),
+            dark: dark && fs.readFileSync(dark).toString(),
+            width: asset.width,
+            height: asset.height,
+          };
+          if (iosOutput) {
+            await generateIosAsset(source, resourceName, iosOutput);
+          }
+          if (androidOutput) {
+            await generateAndroidAsset(source, resourceName, androidOutput);
+          }
+        } catch (error) {
+          if (
+            error instanceof InputError ||
+            error instanceof TransformationError
+          ) {
+            error.file = light;
+          }
+          throw error;
         }
       })
   );
