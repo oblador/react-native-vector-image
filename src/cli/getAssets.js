@@ -15,6 +15,9 @@ async function getAssets(options) {
   const config = await loadConfig(
     { cwd: process.cwd(), config: options.config },
     {
+      resolver: {
+        resolverMainFields: ['react-native', 'browser', 'main'],
+      },
       transformer: {
         allowOptionalDependencies: true,
         babelTransformerPath: require.resolve(
