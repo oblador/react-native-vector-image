@@ -9,11 +9,14 @@ async function getAssets(options) {
     dev: false,
     minify: false,
     platform: 'ios',
-    resetCache: options.resetCache,
   };
 
   const config = await loadConfig(
-    { cwd: process.cwd(), config: options.config },
+    {
+      cwd: process.cwd(),
+      config: options.config,
+      resetCache: options.resetCache,
+    },
     {
       resolver: {
         resolverMainFields: ['react-native', 'browser', 'main'],
