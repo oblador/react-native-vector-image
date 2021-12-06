@@ -93,6 +93,10 @@ Some optimizations applied by SVGO are not compatible with the SVG parser on And
 
 It means that the native vector asset does not exist or is out of sync with the SVG. Simply generate the files and recompile the app.
 
+### the `generate` command does not generate any new assets
+
+Make sure your image component is used (imported) somewhere in your code, otherwise the asset generator won't find it.
+
 ## License
 
 [MIT License](http://opensource.org/licenses/mit-license.html). © Joel Arvidsson 2021
