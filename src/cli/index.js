@@ -44,6 +44,16 @@ function main(argv) {
           description: 'Path to an Android `res` folder',
           default: 'android/app/src/main/res',
         },
+        'current-color': {
+          description: 'Replace any `current` color references in SVGs.',
+          default: '#000000',
+          type: 'string',
+        },
+        'current-color-dark': {
+          description: 'Replace any `current` color references in `.dark.svg` SVGs.',
+          default: '#ffffff',
+          type: 'string',
+        },
       },
       async (options) => {
         try {

@@ -74,6 +74,8 @@ yarn react-native-vector-image generate
 | `--no-ios-output`     | Disable iOS output.                             | `false`                       |
 | `--android-output`    | Path to an Android `res` folder.                | `android/app/src/main/res`    |
 | `--no-android-output` | Disable Android output.                         | `false`                       |
+| `--current-color`       | Replace any `current` color references in SVGs. | `#000000`                       |
+| `--current-color-dark`       | Replace any `current` color references in `.dark.svg` SVGs. | `#ffffff`                       |
 
 ### Step 3: recompile
 

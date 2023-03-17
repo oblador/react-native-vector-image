@@ -5,6 +5,7 @@ const generateAndroidAsset = require('./generateAndroidAsset');
 const getAssets = require('./getAssets');
 const getResourceName = require('../getResourceName');
 const resolveAssetSources = require('./resolveAssetSources');
+const readSvgAsset = require('./readSvgAsset');
 const { InputError, TransformationError } = require('./errors');
 
 async function removeGeneratedAssets(directory) {
@@ -28,6 +29,8 @@ async function generateAssets({
   config,
   entryFile,
   resetCache,
+  currentColor,
+  currentColorDark,
 }) {
   const assets = await getAssets({ config, entryFile, resetCache });
 
@@ -54,8 +57,8 @@ async function generateAssets({
 
           const resourceName = getResourceName(asset);
           const source = {
-            light: fs.readFileSync(light).toString(),
-            dark: dark && fs.readFileSync(dark).toString(),
+            light: readSvgAsset(light, currentColor),
+            dark: dark && readSvgAsset(dark, currentColorDark),
             width: asset.width,
             height: asset.height,
           };
