@@ -5,7 +5,7 @@ const readSvgAsset = (path, currentColor) =>
     .readFileSync(path)
     .toString()
     .replace(
-      /\s(fill|stroke|stop-color|flood-color|lighting-color)=["']current["']/g,
+      /\s(fill|stroke|stop-color|flood-color|lighting-color)=["']currentColor["']/g,
       (_, attribute) => ` ${attribute}="${currentColor}"`
     );
 

@@ -1,7 +1,6 @@
 const Server = require('metro/src/Server');
 const { loadConfig } = require('metro-config');
 const output = require('metro/src/shared/output/bundle');
-const path = require('path');
 
 async function getAssets(options) {
   const args = {

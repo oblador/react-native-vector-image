@@ -5,7 +5,6 @@
 
 [![Tests](https://github.com/oblador/react-native-vector-image/actions/workflows/tests.yml/badge.svg)](https://github.com/oblador/react-native-vector-image/actions/workflows/tests.yml) [![npm](https://img.shields.io/npm/v/react-native-vector-image.svg)](https://npmjs.com/package/react-native-vector-image)
 
-
 - Faster render – ~5x faster than `react-native-svg`.
 - Smaller JS bundle = faster startup.
 - Native support for dark mode.
@@ -65,17 +64,17 @@ This takes a while as metro has to go through all the code to find the imported 
 yarn react-native-vector-image generate
 ```
 
-| Argument              | Description                                     | Default                       |
-| --------------------- | ----------------------------------------------- | ----------------------------- |
-| `--entry-file`        | Path to the app entrypoint file.                | `index.js`                    |
-| `--config`            | Path to the metro config file.                  | `metro.config.js`             |
-| `--reset-cache`       | Reset metro cache before extracting SVG assets. | `false`                       |
-| `--ios-output`        | Path to an iOS `.xcassets` folder.              | `ios/AppName/Images.xcassets` |
-| `--no-ios-output`     | Disable iOS output.                             | `false`                       |
-| `--android-output`    | Path to an Android `res` folder.                | `android/app/src/main/res`    |
-| `--no-android-output` | Disable Android output.                         | `false`                       |
-| `--current-color`       | Replace any `current` color references in SVGs. | `#000000`                       |
-| `--current-color-dark`       | Replace any `current` color references in `.dark.svg` SVGs. | `#ffffff`                       |
+| Argument               | Description                                                      | Default                       |
+| ---------------------- | ---------------------------------------------------------------- | ----------------------------- |
+| `--entry-file`         | Path to the app entrypoint file.                                 | `index.js`                    |
+| `--config`             | Path to the metro config file.                                   | `metro.config.js`             |
+| `--reset-cache`        | Reset metro cache before extracting SVG assets.                  | `false`                       |
+| `--ios-output`         | Path to an iOS `.xcassets` folder.                               | `ios/AppName/Images.xcassets` |
+| `--no-ios-output`      | Disable iOS output.                                              | `false`                       |
+| `--android-output`     | Path to an Android `res` folder.                                 | `android/app/src/main/res`    |
+| `--no-android-output`  | Disable Android output.                                          | `false`                       |
+| `--current-color`      | Replace any `currentColor` color references in SVGs.             | `#000000`                     |
+| `--current-color-dark` | Replace any `currentColor` color references in `.dark.svg` SVGs. | `#ffffff`                     |
 
 ### Step 3: recompile
 
