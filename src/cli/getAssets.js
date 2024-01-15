@@ -7,7 +7,7 @@ const getBabelTransformerPath = () => {
     // for RN 73+
     return require.resolve('@react-native/metro-babel-transformer');
   } catch (e) {
-    // to unsure backwards compatibility with old RN versions (RN < 73)
+    // to ensure backwards compatibility with old RN versions (RN < 73)
     return require.resolve('metro-react-native-babel-transformer');
   }
 }
