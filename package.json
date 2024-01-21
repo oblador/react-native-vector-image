@@ -5,6 +5,10 @@
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "homepage": "https://github.com/oblador/react-native-vector-image",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oblador/react-native-vector-image.git"
+  },
   "scripts": {
     "test": "jest src"
   },
