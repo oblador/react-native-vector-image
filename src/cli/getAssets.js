@@ -2,6 +2,16 @@ const Server = require('metro/src/Server');
 const { loadConfig } = require('metro-config');
 const output = require('metro/src/shared/output/bundle');
 
+const getBabelTransformerPath = () => {
+  try {
+    // for RN 73+
+    return require.resolve('@react-native/metro-babel-transformer');
+  } catch (e) {
+    // to ensure backwards compatibility with old RN versions (RN < 73)
+    return require.resolve('metro-react-native-babel-transformer');
+  }
+}
+
 async function getAssets(options) {
   const args = {
     entryFile: options.entryFile,
@@ -22,9 +32,7 @@ async function getAssets(options) {
       },
       transformer: {
         allowOptionalDependencies: true,
-        babelTransformerPath: require.resolve(
-          'metro-react-native-babel-transformer'
-        ),
+        babelTransformerPath: getBabelTransformerPath(),
         assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
       },
     }
