@@ -15,6 +15,8 @@
 yarn add react-native-vector-image @klarna/react-native-vector-drawable
 ```
 
+For expo, see [`@zamplyy/react-native-vector-image-plugin`](https://github.com/zamplyy/react-native-vector-image-plugin).
+
 ### Android
 
 Edit `android/app/build.gradle` to look like this (without the +):
