@@ -1,10 +1,10 @@
 import React from 'react';
-import AssetRegistry from 'react-native/Libraries/Image/AssetRegistry';
-import { VectorImageCompat } from './VectorImageCompat';
+import { Image } from 'react-native';
+import { getAssetByID } from '@react-native/assets-registry/registry';
 import getResourceName from './getResourceName';
 
 export default function VectorImage({ source, style, ...props }) {
-  const asset = AssetRegistry.getAssetByID(source);
+  const asset = getAssetByID(source);
   if (!asset) {
     console.warn(
       `No asset registered for source "${source}", you may have to generate assets and recompile`
@@ -13,7 +13,7 @@ export default function VectorImage({ source, style, ...props }) {
   }
   const resourceName = getResourceName(asset);
   return (
-    <VectorImageCompat
+    <Image
       source={{ uri: resourceName }}
       style={[{ width: asset.width, height: asset.height }, style]}
       {...props}

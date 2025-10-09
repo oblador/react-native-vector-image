@@ -12,7 +12,7 @@
 ## Installation
 
 ```sh
-yarn add react-native-vector-image @klarna/react-native-vector-drawable
+yarn add react-native-vector-image
 ```
 
 For expo, see [`@zamplyy/react-native-vector-image-plugin`](https://github.com/zamplyy/react-native-vector-image-plugin).
@@ -22,11 +22,9 @@ For expo, see [`@zamplyy/react-native-vector-image-plugin`](https://github.com/z
 Edit `android/app/build.gradle` to look like this (without the +):
 
 ```diff
-project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
-]
-
-apply from: "../../node_modules/react-native/react.gradle"
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
 + apply from: "../../node_modules/react-native-vector-image/strip_svgs.gradle"
 ```
 
@@ -37,8 +35,10 @@ Open your project in Xcode, select the _Build Phases_ tab, and edit the `Bundle 
 ```diff
 set -e
 
-export NODE_BINARY=node
-../node_modules/react-native/scripts/react-native-xcode.sh
+WITH_ENVIRONMENT="$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh"
+REACT_NATIVE_XCODE="$REACT_NATIVE_PATH/scripts/react-native-xcode.sh"
+
+/bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
 + ../node_modules/react-native-vector-image/strip_svgs.sh
 ```
 
