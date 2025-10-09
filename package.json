@@ -1,6 +1,6 @@
 {
   "name": "react-native-vector-image",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "description": "Native vector images generated from SVG",
   "main": "src/index.js",
   "types": "src/index.d.ts",
