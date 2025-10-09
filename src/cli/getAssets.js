@@ -1,6 +1,6 @@
-const Server = require('metro/src/Server');
+const { default: Server } = require('metro/private/Server');
 const { loadConfig } = require('metro-config');
-const output = require('metro/src/shared/output/bundle');
+const output = require('metro/private/shared/output/bundle');
 
 const getBabelTransformerPath = () => {
   try {
@@ -10,7 +10,7 @@ const getBabelTransformerPath = () => {
     // to ensure backwards compatibility with old RN versions (RN < 73)
     return require.resolve('metro-react-native-babel-transformer');
   }
-}
+};
 
 async function getAssets(options) {
   const args = {

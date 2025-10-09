@@ -42,13 +42,11 @@
     "tempy": "^1.0.1",
     "yargs": "^16.2.0"
   },
-  "peerDependencies": {
-    "@klarna/react-native-vector-drawable": ">=0.4.0"
-  },
   "devDependencies": {
     "jest": "^26.6.3",
-    "metro": ">=0.58.0",
-    "metro-config": ">=0.58.0",
+    "metro": ">=0.83.3",
+    "metro-config": ">=0.83.3",
     "prettier": "^2.2.1"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
