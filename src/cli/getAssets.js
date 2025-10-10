@@ -1,14 +1,20 @@
-const { default: Server } = require('metro/private/Server');
+const server = require('metro/private/Server');
 const { loadConfig } = require('metro-config');
 const output = require('metro/private/shared/output/bundle');
 
+const Server = server.Server || server.default || server;
 const getBabelTransformerPath = () => {
   try {
     // for RN 73+
     return require.resolve('@react-native/metro-babel-transformer');
   } catch (e) {
-    // to ensure backwards compatibility with old RN versions (RN < 73)
-    return require.resolve('metro-react-native-babel-transformer');
+    try {
+      // for Expo
+      return require.resolve('@expo/metro-config/babel-transformer');
+    } catch (e) {
+      // to ensure backwards compatibility with old RN versions (RN < 73)
+      return require.resolve('metro-react-native-babel-transformer');
+    }
   }
 };
 
