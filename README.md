@@ -86,6 +86,20 @@ yarn react-native run-ios
 yarn react-native run-android
 ```
 
+### Optional: using source/drawable
+
+If you need to use the underlying image source/drawable you can use the `VectorImage.resolveAssetSource` method, for example with Expo's native tabs:
+
+```tsx
+const iconSource = VectorImage.resolveAssetSource(require('./icon.svg'));
+
+return (
+  <NativeTabs.Trigger name="index">
+    <Icon src={iconSource} drawable={iconSource.uri} />
+  </NativeTabs.Trigger>
+);
+```
+
 ## Troubleshooting
 
 ### `generate` command outputs "Error while parsing image.svg"

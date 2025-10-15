@@ -8,6 +8,10 @@ export interface VectorImageProps extends ImageProps {
   source: ImageRequireSource;
 }
 
-declare const VectorImage: React.FunctionComponent<VectorImageProps>;
+export function resolveVectorAssetSource(source: ImageRequireSource): ImageRequireSource | null;
+
+declare const VectorImage: React.FunctionComponent<VectorImageProps> & {
+  resolveAssetSource: typeof resolveVectorAssetSource;
+};
 
 export default VectorImage;
