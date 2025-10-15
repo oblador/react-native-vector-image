@@ -1,6 +1,6 @@
 {
   "name": "react-native-vector-image",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Native vector images generated from SVG",
   "main": "src/index.js",
   "types": "src/index.d.ts",
@@ -41,6 +41,14 @@
     "svg-to-pdfkit": "^0.1.8",
     "tempy": "^1.0.1",
     "yargs": "^16.2.0"
+  },
+  "peerDependencies": {
+    "expo": ">=47.0.0"
+  },
+  "peerDependenciesMeta": {
+    "expo": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "jest": "^26.6.3",
