@@ -7,14 +7,14 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "postinstall": "DESTINATION='node_modules/react-native-vector-image' LIB_FILE=`cd .. && echo \\`pwd\\`/\\`npm pack\\`` && (rm -rf $DESTINATION || true) && mkdir -p $DESTINATION && tar -xvzf $LIB_FILE -C $DESTINATION --strip-components 1 && rm $LIB_FILE",
+    "postinstall": "(cd .. && npm pack) && DESTINATION='node_modules/react-native-vector-image' LIB_FILE=`ls ../*.tgz` && (rm -rf $DESTINATION || true) && mkdir -p $DESTINATION && tar -xvzf $LIB_FILE -C $DESTINATION --strip-components 1 && rm $LIB_FILE",
     "assets": "react-native-vector-image generate",
     "test": "jest"
   },
   "dependencies": {
     "react": "19.1.1",
     "react-native": "0.82.0",
-    "react-native-vector-image": "^0.4.5"
+    "react-native-vector-image": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -26,13 +26,17 @@ async function removeGeneratedAssets(directory) {
 async function generateAssets({
   iosOutput,
   androidOutput,
+  bundleWithExpo,
   config,
   entryFile,
   resetCache,
   currentColor,
   currentColorDark,
 }) {
-  const assets = await getAssets({ config, entryFile, resetCache });
+  const assets = await getAssets(
+    { config, entryFile, resetCache },
+    bundleWithExpo
+  );
 
   if (iosOutput) {
     await removeGeneratedAssets(iosOutput);

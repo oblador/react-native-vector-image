@@ -27,6 +27,13 @@ function main(argv) {
           demandOption: true,
           type: 'string',
         },
+        'bundle-with-expo': {
+          description:
+            'Whether to bundle the app with Expo presets or using metro directly',
+          default: false,
+          demandOption: true,
+          type: 'boolean',
+        },
         config: {
           description: 'Path to the metro config file',
           type: 'string',
@@ -50,7 +57,8 @@ function main(argv) {
           type: 'string',
         },
         'current-color-dark': {
-          description: 'Replace any `current` color references in `.dark.svg` SVGs.',
+          description:
+            'Replace any `current` color references in `.dark.svg` SVGs.',
           default: '#ffffff',
           type: 'string',
         },
