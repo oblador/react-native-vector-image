@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --non-interactive --silent
       - name: Publish
         uses: JS-DevTools/npm-publish@v3
         with:
