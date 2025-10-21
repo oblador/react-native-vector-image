@@ -8,23 +8,36 @@ const getBabelTransformerPath = () => {
     // for RN 73+
     return require.resolve('@react-native/metro-babel-transformer');
   } catch (e) {
-    try {
-      // for Expo
-      return require.resolve('@expo/metro-config/babel-transformer');
-    } catch (e) {
-      // to ensure backwards compatibility with old RN versions (RN < 73)
-      return require.resolve('metro-react-native-babel-transformer');
-    }
+    // to ensure backwards compatibility with old RN versions (RN < 73)
+    return require.resolve('metro-react-native-babel-transformer');
   }
 };
 
-async function getAssets(options) {
+async function createMetroServerAndBundleRequest(
+  options,
+  bundleWithExpo = false
+) {
   const args = {
     entryFile: options.entryFile,
     dev: false,
     minify: false,
     platform: 'ios',
   };
+
+  if (bundleWithExpo) {
+    let createMetroServerAndBundleRequestAsync = null;
+    try {
+      createMetroServerAndBundleRequestAsync = require('expo/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync')
+        .createMetroServerAndBundleRequestAsync;
+    } catch {
+      createMetroServerAndBundleRequestAsync = require('@expo/cli/build/src/export/embed/exportEmbedAsync')
+        .createMetroServerAndBundleRequestAsync;
+    }
+    return await createMetroServerAndBundleRequestAsync(process.cwd(), {
+      ...args,
+      ...options,
+    });
+  }
 
   const config = await loadConfig(
     {
@@ -46,7 +59,7 @@ async function getAssets(options) {
 
   process.env.NODE_ENV = 'production';
 
-  const requestOpts = {
+  const bundleRequest = {
     entryFile: args.entryFile,
     dev: args.dev,
     minify: false,
@@ -55,12 +68,21 @@ async function getAssets(options) {
   };
   const server = new Server(config);
 
+  return { server, bundleRequest };
+}
+
+async function getAssets(options, bundleWithExpo) {
+  const { server, bundleRequest } = await createMetroServerAndBundleRequest(
+    options,
+    bundleWithExpo
+  );
+
   try {
-    await output.build(server, requestOpts);
+    await output.build(server, bundleRequest);
 
     return await server.getAssets({
       ...Server.DEFAULT_BUNDLE_OPTIONS,
-      ...requestOpts,
+      ...bundleRequest,
       bundleType: 'todo',
     });
   } finally {

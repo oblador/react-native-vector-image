@@ -1,8 +1,10 @@
 name: Tests
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   unit:
@@ -19,8 +21,10 @@ jobs:
           node-version-file: '.node-version'
       - name: Install dependencies
         run: yarn --frozen-lockfile --non-interactive --silent --ignore-scripts
-      - name: Run tests
+      - name: Run unit tests
         run: yarn test
+      - name: Run plugin tests
+        run: yarn test:plugin
 
   ios:
     name: iOS integration tests

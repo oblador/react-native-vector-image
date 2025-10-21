@@ -8,3 +8,5 @@ node_modules/
 
 # Logs
 *.log
+
+plugin/build/

@@ -8,14 +8,13 @@
 - Faster render – ~5x faster than `react-native-svg`.
 - Smaller JS bundle = faster startup.
 - Native support for dark mode.
+- Web support for Expo.
 
 ## Installation
 
 ```sh
 yarn add react-native-vector-image
 ```
-
-For expo, see [`@zamplyy/react-native-vector-image-plugin`](https://github.com/zamplyy/react-native-vector-image-plugin).
 
 ### Android
 
@@ -44,6 +43,44 @@ REACT_NATIVE_XCODE="$REACT_NATIVE_PATH/scripts/react-native-xcode.sh"
 
 <img width="1212" alt="" src="https://user-images.githubusercontent.com/378279/115999935-544c0600-a5ee-11eb-9c59-6fb50e434ed0.png">
 
+### Expo
+
+After installing this npm package, add the [config plugin](https://docs.expo.io/guides/config-plugins/) to the [`plugins`](https://docs.expo.io/versions/latest/config/app/#plugins) array of your `app.json` or `app.config.js`:
+
+```json
+{
+  "expo": {
+    "plugins": ["react-native-vector-image"]
+  }
+}
+```
+
+Next, rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
+
+#### Options
+
+```json
+{
+  "expo": {
+    "plugins": [
+      [
+        "react-native-vector-image",
+        {
+          // These are default options, change if you want a different value:
+          "stripSvgs": false, // if true, svgs will be removed from bundle. expo-updates package crashes when svgs it expects in the bundle are not there
+          "metroConfigFile": "metro.config.js",
+          "resetCache": false,
+          "bundleWithExpo": true,
+          "entryFile": "index.ts"
+        }
+      ]
+    ]
+  }
+}
+```
+
+Shout out to [zamplyy](https://github.com/zamplyy) for making the first version of the Expo plugin.
+
 ## Usage
 
 Since native vector assets cannot be served over http via metro dev server, they must be generated and compiled into the app bundle.
@@ -62,21 +99,24 @@ To add dark mode to your image, create a new file with an `.dark.svg` extension,
 
 This takes a while as metro has to go through all the code to find the imported SVGs.
 
+_Note: for Expo just use the plugin and `npx expo prebuild`._
+
 ```sh
 yarn react-native-vector-image generate
 ```
 
-| Argument               | Description                                                      | Default                       |
-| ---------------------- | ---------------------------------------------------------------- | ----------------------------- |
-| `--entry-file`         | Path to the app entrypoint file.                                 | `index.js`                    |
-| `--config`             | Path to the metro config file.                                   | `metro.config.js`             |
-| `--reset-cache`        | Reset metro cache before extracting SVG assets.                  | `false`                       |
-| `--ios-output`         | Path to an iOS `.xcassets` folder.                               | `ios/AppName/Images.xcassets` |
-| `--no-ios-output`      | Disable iOS output.                                              | `false`                       |
-| `--android-output`     | Path to an Android `res` folder.                                 | `android/app/src/main/res`    |
-| `--no-android-output`  | Disable Android output.                                          | `false`                       |
-| `--current-color`      | Replace any `currentColor` color references in SVGs.             | `#000000`                     |
-| `--current-color-dark` | Replace any `currentColor` color references in `.dark.svg` SVGs. | `#ffffff`                     |
+| Argument               | Description                                                          | Default                       |
+| ---------------------- | -------------------------------------------------------------------- | ----------------------------- |
+| `--entry-file`         | Path to the app entrypoint file.                                     | `index.js`                    |
+| `--config`             | Path to the metro config file.                                       | `metro.config.js`             |
+| `--reset-cache`        | Reset metro cache before extracting SVG assets.                      | `false`                       |
+| `--bundle-with-expo`   | Whether to bundle the app with Expo presets or using metro directly. | `false`                       |
+| `--ios-output`         | Path to an iOS `.xcassets` folder.                                   | `ios/AppName/Images.xcassets` |
+| `--no-ios-output`      | Disable iOS output.                                                  | `false`                       |
+| `--android-output`     | Path to an Android `res` folder.                                     | `android/app/src/main/res`    |
+| `--no-android-output`  | Disable Android output.                                              | `false`                       |
+| `--current-color`      | Replace any `currentColor` color references in SVGs.                 | `#000000`                     |
+| `--current-color-dark` | Replace any `currentColor` color references in `.dark.svg` SVGs.     | `#ffffff`                     |
 
 ### Step 3: recompile
 

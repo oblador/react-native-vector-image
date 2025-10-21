@@ -5564,10 +5564,10 @@ react-is@^19.1.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.2.0.tgz#ddc3b4a4e0f3336c3847f18b806506388d7b9973"
   integrity sha512-x3Ax3kNSMIIkyVYhWPyO09bu0uttcAIoecO/um/rKGQ4EltYWVYtyiGkS/3xMynrbVQdS69Jhlv8FXUEZehlzA==
 
-react-native-vector-image@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/react-native-vector-image/-/react-native-vector-image-0.4.5.tgz#910a6e537d180c2082c85d91951aea6ba87e6d2f"
-  integrity sha512-19B9a+CXvIfTCCOG58lttULtG9/3BfBO5VBdvnElKmXov/V3mBbtAPBNwC+tmqu3cWKkAMzq8jeBwG7FxN9OAA==
+react-native-vector-image@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-vector-image/-/react-native-vector-image-0.5.1.tgz#642462da775d4ae4b64f7eed5862cefd6a4fd20c"
+  integrity sha512-ik2ZwzLkSPf0/PpbMBt+kaMsgewc/VqHeKDRzAa4vZeZ+WCVEAj+++yVTm/XB2QV2z3gz4nfW5TEwUM0bWhTag==
   dependencies:
     chalk "^4.1.1"
     chroma-js "^2.1.1"
