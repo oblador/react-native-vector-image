@@ -8,7 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: production
     permissions:
       id-token: write
       contents: read
@@ -25,5 +24,3 @@ jobs:
         run: yarn --frozen-lockfile --non-interactive --silent
       - name: Publish
         uses: JS-DevTools/npm-publish@v4
-        with:
-          provenance: true
