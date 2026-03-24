@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const os = require('os');
 const path = require('path');
 const generateIosAsset = require('./generateIosAsset');
 const generateAndroidAsset = require('./generateAndroidAsset');
@@ -83,6 +84,14 @@ async function generateAssets({
         }
       })
   );
+
+  // Clear Metro's cache after generating native assets so the dev server
+  // recomputes asset hashes to match the regenerated native resources.
+  // Without this, a stale Metro cache can serve an old content hash after
+  // SVG files change (e.g. after a rebase), causing "Could not find image"
+  // warnings at runtime.
+  const metroCacheDir = path.join(os.tmpdir(), 'metro-cache');
+  await fs.remove(metroCacheDir);
 }
 
 module.exports = generateAssets;
