@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { getAssetByID } from '@react-native/assets-registry/registry';
+import getAssetByID from './getAssetByID';
 import getResourceName from './getResourceName';
 
 export function resolveVectorAssetSource(source) {
